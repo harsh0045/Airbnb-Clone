@@ -114,8 +114,9 @@ const Modal: React.FC<ModalProps>=({
                 
                 <div className="
                 flex
+                pt-8
+                pb-4
                 items-center
-                p-6
                 rounded-t
                 justify-center
                 relative
@@ -129,7 +130,7 @@ const Modal: React.FC<ModalProps>=({
                         hover:opacity-70
                         transition
                         absolute
-                        left-9
+                        left-6
                      "
                    >
                     <IoMdClose size={18}/>
@@ -138,7 +139,7 @@ const Modal: React.FC<ModalProps>=({
                        {title}
                    </div>
                 </div>
-                 <div className="relative p-6 flex-auto">
+                 <div className="relative px-6 flex-auto">
                     {body}
                  </div>
                 
@@ -166,6 +167,7 @@ const Modal: React.FC<ModalProps>=({
                           />
                        
                        </div>
+                       {footer}
                  </div>
 
             </div>
