@@ -114,8 +114,8 @@ const Modal: React.FC<ModalProps>=({
                 
                 <div className="
                 flex
-                pt-8
-                pb-4
+                py-2
+               
                 items-center
                 rounded-t
                 justify-center

@@ -78,7 +78,7 @@ const RegisterModal = () => {
 
 
     const footerContent=(
-        <div className="flex flex-col gap-2 mt-3">
+        <div className="flex  flex-col gap-2 mt-3">
             <hr/>
             <Button 
              outline 
