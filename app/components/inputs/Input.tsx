@@ -39,7 +39,7 @@ const Input :React.FC<InputProps>=({
          type={type}
          className={`
             peer 
-            w-full p-4  font-light bg-white
+            w-full pt-6 pb-2 px-4  font-light bg-white
             border-2 rounded-md outline-none transition 
             disabled:opacity-70
             disabled:cursor-not-allowed

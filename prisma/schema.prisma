@@ -12,22 +12,21 @@ datasource db {
   provider = "mongodb"
   url      = env("DATABASE_URL")
 }
-
 model User {
-  id    String   @id @default(auto()) @map("_id") @db.ObjectId
-  email String ? @unique
-  name String ?
-  emailVerified DateTime?
-  image String?
-  hashedPassword String?
-  createdAt DateTime @default(now()) 
-  updatedAt DateTime @updatedAt
-  favouriteIds String[] @db.ObjectId
-
-  accounts Account[]
-  listings Listing[]
-  reservations Reservation[]
+  id             String   @id @default(auto()) @map("_id") @db.ObjectId
+  name           String?   // 🔄 Make `name` required
+  email          String ?  @unique  // 🔄 Make `email` required
+  hashedPassword String?   // 🔄 Make `hashedPassword` required
+  emailVerified  DateTime?
+  image          String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  favoriteIds    String[] @db.ObjectId // ✅ Optional if necessary
+  accounts       Account[]
+  listings       Listing[]
+  reservations   Reservation[]
 }
+
 model Account {
   id String @id @default(auto()) @map("_id") @db.ObjectId
   userId String @db.ObjectId
