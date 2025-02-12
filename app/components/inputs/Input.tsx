@@ -24,12 +24,14 @@ const Input :React.FC<InputProps>=({
     errors
 }) => {
   return (
-    <div className="w-full relative">
+    <div className="w-full relative ">
         {formatPrice && (
-            <BiDollar 
+          
+               <BiDollar 
              size={24}
-             className="text-neutral-700 absolute top-5 left-2"
+             className="text-neutral-700 absolute  top-6 left-2"
              />
+        
         )}  
         <input 
          id={id}
@@ -39,18 +41,18 @@ const Input :React.FC<InputProps>=({
          type={type}
          className={`
             peer 
-            w-full pt-6 pb-2 px-4  font-light bg-white
+            w-full pt-6  pb-2 px-4  font-light bg-white
             border-2 rounded-md outline-none transition 
             disabled:opacity-70
             disabled:cursor-not-allowed
-            ${formatPrice ?"border-rose-500":"border-neutral-300"}
+            ${formatPrice ?"border-rose-500 pl-8 pb-6":"border-neutral-300"}
             ${errors[id] ? "border-rose-500":"border-neutral-300"}
             ${errors[id]? "focus:border-rose-500":"focus:border-black"}
             `}
          />
          <label className={
             `absolute text-md duration-150 transform -translate-y-3 top-5 z-10 origin-[0]
-            ${formatPrice ? "left-9" :"left-4"}
+            ${formatPrice ? "left-8 top-5" :"left-4"}
             peer-placeholder-shown:scale-100
             peer-placeholder-shown:translate-y-0
             peer-focus:scale-75
