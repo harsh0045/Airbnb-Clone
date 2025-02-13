@@ -3,6 +3,7 @@
 
 import { useRouter } from "next/navigation";
 import Heading from "./Heading";
+import Button from "./Button";
 
 
 
@@ -29,6 +30,15 @@ const EmptyState :React.FC<EmptyStateProps>=({
          title={title}
          subtitle={subtitle}
          />
+         <div className="w-48 mt-4">
+            {showReset && (
+               <Button
+                 outline
+                 label="Remove all filters"
+                 onClick={()=>router.push('/')}
+                />
+            )}
+         </div>
     </div>
   )
 }
