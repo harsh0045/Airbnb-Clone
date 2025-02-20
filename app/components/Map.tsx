@@ -4,11 +4,12 @@ import L from "leaflet";
 import { MapContainer, Marker, TileLayer } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 
+
 // Fix: Use require() instead of direct imports
 const markerIcon = L.icon({
-  iconUrl: require("leaflet/dist/images/marker-icon.png"),
-  iconRetinaUrl: require("leaflet/dist/images/marker-icon-2x.png"),
-  shadowUrl: require("leaflet/dist/images/marker-shadow.png"),
+  iconUrl: new URL("leaflet/dist/images/marker-icon.png", import.meta.url).href,
+  iconRetinaUrl: new URL("leaflet/dist/images/marker-icon-2x.png", import.meta.url).href,
+  shadowUrl: new URL("leaflet/dist/images/marker-shadow.png", import.meta.url).href,
   iconSize: [25, 41], // Set proper size
   iconAnchor: [12, 41], // Anchor point for correct positioning
 });

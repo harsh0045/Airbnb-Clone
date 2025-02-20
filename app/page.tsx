@@ -1,7 +1,7 @@
 export const dynamic = "force-dynamic";
 import getCurrentUser from "./actions/getCurrentUser";
 import getListings, { IListingParams } from "./actions/getListings";
-import getReservations from "./actions/getReservations";
+
 import ClientOnly from "./components/ClientOnly";
 import Container from "./components/Container";
 import EmptyState from "./components/EmptyState";
