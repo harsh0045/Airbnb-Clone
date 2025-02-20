@@ -1,41 +1,46 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import getCurrentUser from "@/app/actions/getCurrentUser";
 import prisma from "@/app/libs/prismadb";
-import { NextRequest } from "next/server";
 
-// Fix: Accept context as a single parameter and destructure inside the function
-export async function POST(request: NextRequest, context: { params: { listingId: string } }) {
-   const { params } = context;
-   const currentUser = await getCurrentUser();
-   if (!currentUser) return NextResponse.error();
+export async function POST(
+  request: NextRequest,
+  { params }: { params: Promise<{ listingId: string }> } // ✅ params is a Promise
+) {
+  const currentUser = await getCurrentUser();
+  if (!currentUser) return NextResponse.error();
 
-   const listingId = params?.listingId;
-   if (!listingId || typeof listingId !== "string") throw new Error("Invalid Id");
+  const { listingId } = await params; // ✅ Await params before accessing properties
 
-   const favoriteIds = [...(currentUser.favoriteIds || []), listingId];
+  if (!listingId)  return NextResponse.error();
 
-   const user = await prisma.user.update({
-      where: { id: currentUser.id },
-      data: { favoriteIds },
-   });
+  let favoriteIds = [...(currentUser.favoriteIds || [])];
+  favoriteIds.push(listingId);
 
-   return NextResponse.json(user);
+  const user = await prisma.user.update({
+    where: { id: currentUser.id },
+    data: { favoriteIds },
+  });
+
+  return NextResponse.json(user);
 }
 
-export async function DELETE(request: NextRequest, context: { params: { listingId: string } }) {
-   const { params } = context;
-   const currentUser = await getCurrentUser();
-   if (!currentUser) return NextResponse.error();
+export async function DELETE(
+  request: NextRequest,
+  { params }: { params: Promise<{ listingId: string }> } // ✅ params is a Promise
+){
+  const currentUser = await getCurrentUser();
+  if (!currentUser) return NextResponse.error();
 
-   const listingId = params?.listingId;
-   if (!listingId || typeof listingId !== "string") throw new Error("Invalid Id");
+  const { listingId } = await params; // ✅ Await params before accessing properties
 
-   const favoriteIds = (currentUser.favoriteIds || []).filter((id) => id !== listingId);
+  if (!listingId) return NextResponse.json({ error: "Invalid Id" }, { status: 400 });
 
-   const user = await prisma.user.update({
-      where: { id: currentUser.id },
-      data: { favoriteIds },
-   });
+  let favoriteIds = [...(currentUser.favoriteIds || [])].filter((id) => id !== listingId);
 
-   return NextResponse.json(user);
+  const user = await prisma.user.update({
+    where: { id: currentUser.id },
+    data: { favoriteIds },
+  });
+
+  return NextResponse.json(user);
 }

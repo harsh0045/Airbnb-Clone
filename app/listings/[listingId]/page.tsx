@@ -4,22 +4,24 @@ import ClientOnly from "@/app/components/ClientOnly";
 import EmptyState from "@/app/components/EmptyState";
 import ListingClient from "./ListingClient";
 import getReservations from "@/app/actions/getReservations";
+
 interface IParams {
-   listingId?: string;
+   listingId: string;  // ✅ Ensure listingId is required
 }
 
-const ListingPage = async ({ params }: { params: IParams }) => {
-   const listing = await getListingById(params);
-   const reservations = await getReservations(params);
-   const currentUser = await getCurrentUser();
-
+const ListingPage = async ({ params }: { params: Promise<IParams> }) => { // ✅ Await params
+   
+   const para=await params;
+   const listing = await getListingById(para);
    if (!listing) {
       return (
          <ClientOnly>
             <EmptyState />
          </ClientOnly>
       );
-   }
+   } 
+   const reservations = await getReservations(para); // ✅ Pass only listingId
+   const currentUser = await getCurrentUser();
 
    return (
       <ClientOnly>
