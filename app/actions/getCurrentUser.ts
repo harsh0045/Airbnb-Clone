@@ -28,7 +28,7 @@ export default async function getCurrentUser(){
             emailVerified:currentUser.emailVerified?.toISOString() || null
 
         };
-    }catch(error:any){
+    }catch(_error){
         return null;
     }
 }

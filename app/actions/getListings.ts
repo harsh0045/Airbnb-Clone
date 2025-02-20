@@ -23,7 +23,7 @@ export default async function getListings(params: IListingParams) {
          locationValue,
          category,
       } = params;
-      let query: any = {};
+      const query: any = {};
 
       if (userId) {
          query.userId = userId;
@@ -81,7 +81,7 @@ export default async function getListings(params: IListingParams) {
       }));
 
       return safeListings;
-   } catch (error: any) {
-      throw new Error(error);
+   } catch (_error: any) {
+      throw new Error(_error);
    }
 }
